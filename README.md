@@ -1,4 +1,3 @@
-````
 # 🏈 YACulator
 
 **YACulator** is a data-driven SWR Projection Engine using matchup-based simulation. It simulates weekly and full-season WR vs defender matchups using advanced snap, scheme, and efficiency data.
@@ -21,7 +20,6 @@
 
 ## 📂 Project Structure
 
-````
 
 YACulator/
 ├── config.py                  # Configuration: file paths, weights, version control
