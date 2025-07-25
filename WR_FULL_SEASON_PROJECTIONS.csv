@@ -1,0 +1,5 @@
+week,wr_name,team,opp_team,scheme,base_pts,adj_pts,slot_weight,wide_weight,safety_weight,lb_weight,top_defenders
+1,Stefon Diggs,BUF,KC,zone,2.0,0.64,0.4,0.6,0.2,0.1,['Trent McDuffie']
+1,Rashee Rice,KC,BUF,man,1.6,0.6,0.6,0.4,0.05,0.0,['Taron Johnson']
+2,Stefon Diggs,BUF,KC,zone,2.0,0.64,0.4,0.6,0.2,0.1,['Trent McDuffie']
+2,Rashee Rice,KC,BUF,man,1.6,0.6,0.6,0.4,0.05,0.0,['Taron Johnson']

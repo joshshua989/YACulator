@@ -1,0 +1,2 @@
+week,wr_name,team,opp_team,scheme,base_pts,adj_pts,slot_weight,wide_weight,safety_weight,lb_weight,top_defenders
+1,Stefon Diggs,BUF,KC,zone,2.1,0.21,0.7,0.3,0.2,0.1,['Trent McDuffie']

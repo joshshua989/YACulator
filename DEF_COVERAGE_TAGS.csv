@@ -1,0 +1,5 @@
+week,team,man_coverage_rate,zone_coverage_rate
+1,BUF,0.55,0.45
+1,KC,0.45,0.55
+2,BUF,0.6,0.4
+2,KC,0.4,0.6
