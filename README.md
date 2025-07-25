@@ -13,18 +13,27 @@
 ## Folder Structure
 
 YACulator/
+
 ├── config.py
 
 ├── matchup_simulator.py
 
 ├── sim_engine.py
+
 ├── data_loader.py
+
 ├── quality_control.py
+
 ├── main.py
+
 ├── exports/
+
 │ ├── season_projection_output.csv
+
 │ └── test_week_projection.csv
+
 ├── data/
+
 │ └── [Your CSV Files]
 
 
