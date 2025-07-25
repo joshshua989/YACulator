@@ -1,0 +1,13 @@
+@echo off
+echo 🔄 Running WR blend...
+python multi_year_blend.py %*
+
+echo 🔄 Running DB blend...
+python multi_year_blend_db.py %*
+
+echo 🧪 Running test week simulation...
+python main.py --mode test --week 1
+
+echo 📅 Running full-season simulation...
+python main.py --mode season
+pause
