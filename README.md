@@ -104,6 +104,91 @@ Easily adjust behavior without changing script logic.
 4. **Live weekly ingestion** – pull updated 2025 stats via `nflverse` or R integration
 5. **Dashboard integration** – Excel or JSON export for visualization
 
+🧠 INTELLIGENCE ENHANCEMENT ROADMAP
+1. 💡 Dynamic WR-DB Route Matching
+Objective: Match WR route types (e.g. slant, go, post) vs DB weaknesses.
+
+Enhancement Ideas:
+
+Use route distributions per WR (from tracking or route data if available).
+
+Match against defender vulnerabilities (e.g. allow high YAC on in-breaking routes).
+
+Score matchups:
+route_match_score = route_success * db_weakness[route_type]
+
+✅ Use Big Data Bowl tracking or pre-tagged route charts.
+
+2. 🧠 Smarter Defensive Scheme Modeling
+Objective: Incorporate disguise, hybrid coverage, and scheme variance.
+
+Enhancement Ideas:
+
+Add man_zone_blend_score per defense instead of binary choice.
+
+Pull 3rd-party scheme data (e.g. PFF, Sports Info Solutions) if available.
+
+Penalize WRs with low win rates vs press in heavy press schemes.
+
+3. 🧮 QB-WR Chemistry & QB Influence
+Objective: Account for QB quality, targeting patterns, and consistency.
+
+Enhancement Ideas:
+
+Add qb_accuracy, aDOT, EPA/play, and target_share_to_WR.
+
+WR fantasy points = fpts_per_target * targets, and targets depend on QB trust.
+
+Create a qb_influence_score:
+
+python
+Copy
+Edit
+score = WR_target_share * QB_accuracy * EPA/play
+4. 📈 Real-Time Adjustments (In-Season Smarts)
+Objective: Learn from recent results.
+
+Enhancement Ideas:
+
+Add rolling averages (last 3 weeks):
+e.g. WR vs man (last 3 games), DB recent targets allowed.
+
+Add injury-adjusted usage spikes (e.g. WR2 becomes WR1).
+
+Update matchups mid-season via API (or user CSV update).
+
+5. 🎯 Game Script + Environment Modeling
+Objective: Simulate how game context affects WR usage.
+
+Enhancement Ideas:
+
+Use Vegas odds or predicted score differentials.
+
+WRs on trailing teams tend to see more volume.
+
+Incorporate weather/dome/altitude:
+Add env_boost = 1.05 for dome, -5% for snow/wind.
+
+🚀 BONUS: Machine Learning Mode
+Once your deterministic logic is maximized, add a lightweight ML layer:
+
+Use LightGBM or XGBoost to learn from all your features (man rate, role penalties, recent form, QB stats, etc.).
+
+Train on past seasons with fantasy point labels.
+
+Use feature importance to guide future app improvements.
+
+🔁 Summary of Next High-Impact Tasks:
+Priority	Task	Benefit
+🔥 High	Add QB influence (accuracy, target share, EPA)	Strong signal for WR projections
+🔥 High	Simulate game scripts and pace	Boost realism of matchups
+✅ Done	Soft alignment roles for DBs	Handles noisy data
+⭐ Medium	Route matching vs DB vulnerabilities	Adds true football IQ
+⭐ Medium	Rolling stat window (e.g. last 3 weeks)	Captures momentum/form
+🚧 Optional	ML on top of deterministic logic	Boosts predictive power
+
+Would you like to start with QB influence, game script modeling, or route vs DB vulnerability mapping? I can implement any of these in your current pipeline.
+
 ---
 
 ## ✅ License
