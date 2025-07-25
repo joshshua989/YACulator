@@ -3,12 +3,14 @@
 # -------------------------------
 # File Paths
 # -------------------------------
-NFL_SCHEDULE_FILE = "NFL_SCHEDULE_2025.csv"
-ADV_WR_STATS_FILE = "ADVANCED_WR_STATS_2024.csv"
-CB_ALIGNMENT_FILE = "CB_ALIGNMENT.csv"
+NFL_SCHEDULE_2025_FILE = "DATA/NFL_SCHEDULE_2025.csv"
+WR_STATS_2024_FILE = "DATA/WR_STATS_2024.csv"
+DB_ALIGNMENT_FILE = "DATA/DB_STATS_2022_2023_2024.csv"
 DEF_COVERAGE_TAGS_FILE = "DEF_COVERAGE_TAGS.csv"
 ROSTER_2025_FILE = "roster_2025.csv"
 ROSTER_2024_FILE = "roster_2024.csv"  # Fallback if 2025 is missing
+BLENDED_WR_FILE = "BLENDED_WR_STATS.csv"
+BLENDED_DB_FILE = "BLENDED_DB_STATS.csv"
 
 # -------------------------------
 # Projection Weights
