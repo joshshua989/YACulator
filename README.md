@@ -41,7 +41,6 @@ YACulator/
 │   ├── roster\_2025.csv
 │   └── roster\_2024.csv (optional fallback)
 └── README.md
-
 ````
 
 ---
