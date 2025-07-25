@@ -20,7 +20,7 @@
 
 ## 📂 Project Structure
 
-
+````
 YACulator/
 ├── config.py                  # Configuration: file paths, weights, version control
 ├── matchup\_simulator.py      # Core logic: matchups and fantasy point adjustments
