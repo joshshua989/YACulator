@@ -26,4 +26,13 @@ def blend_wr_stats():
     print(f"✅ Saved blended WR stats to {BLENDED_WR_FILE}")
 
 if __name__ == "__main__":
-    blend_wr_stats()
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Blend WR Stats (2022–2024)")
+    parser.add_argument("--no-blend", action="store_true", help="Skip WR blending")
+    args = parser.parse_args()
+
+    if not args.no_blend:
+        blend_wr_stats()
+    else:
+        print("⚠️ Skipping WR blend due to --no-blend flag.")
