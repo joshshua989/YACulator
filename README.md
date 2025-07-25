@@ -1,6 +1,6 @@
 # 🏈 YACulator
 
-**YACulator** is a data-driven Wide-Receiver Projection Engine using matchup-based simulation. It simulates weekly and full-season WR vs defender matchups using advanced snap, scheme, and efficiency data.
+**YACulator** is a data-driven wide-receiver projection engine using matchup-based simulation. It simulates weekly and full-season WR vs defender matchups using advanced snap, scheme, and efficiency data.
 
 ---
 
