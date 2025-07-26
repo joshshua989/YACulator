@@ -11,6 +11,7 @@ ROSTER_2025_FILE = "roster_2025.csv"
 ROSTER_2024_FILE = "roster_2024.csv"  # Fallback if 2025 is missing
 BLENDED_WR_FILE = "BLENDED_WR_STATS.csv"
 BLENDED_DB_FILE = "BLENDED_DB_STATS.csv"
+STADIUM_ENV_FILE = "DATA/STADIUM_ENVIRONMENT_PROFILES.csv"
 
 # -------------------------------
 # Projection Weights
@@ -42,3 +43,15 @@ EXPORT_TEST_WEEK_FILE = "test_week_projection.csv"
 # Logging + Quality Control
 # -------------------------------
 ENABLE_QUALITY_CONTROL = True
+
+# -------------------------------
+# Alignment Logic
+# -------------------------------
+USE_SOFT_ALIGNMENT = True  # Enable probabilistic DB role assignment
+
+# -------------------------------
+# Environment Settings
+# -------------------------------
+FORCE_DOME_NO_WEATHER_PENALTY = True
+CLIMATE_PHASE = "Neutral"  # Options: "ElNino", "LaNina", "Neutral"
+USE_FORECAST_WEATHER = True
