@@ -72,14 +72,21 @@ matchup_simulator.py
 ````
 
 📍 main.py (Entry Point)
-
 ````
 main()
 ├── args = --mode test --week 2
 ├── run_week_simulation(week=2)
 ````
 
-
+🛠️ sim_engine.py → run_week_simulation(week=2)
+````
+run_week_simulation(week)
+├── schedule_df ← load_csv(NFL_SCHEDULE_2025_FILE)
+├── wr_map ← load_wr_stats(WR_STATS_2024_FILE)
+├── db_map ← load_db_alignment(DB_ALIGNMENT_FILE)
+├── def_coverage_map ← from DEF_COVERAGE_TAGS_FILE
+├── env_boost_map ← from weather_estimator.py
+````
 
 ---
 
