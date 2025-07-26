@@ -88,6 +88,8 @@ run_week_simulation(week)
 ├── env_boost_map ← from weather_estimator.py
 ````
 
+
+
 ---
 
 ## 📥 Required Input Files
@@ -248,3 +250,109 @@ Created by **Josh Ellen** –
 GitHub: [@joshshua989](https://github.com/joshshua989)
 
 ---
+
+📄 NFL_SCHEDULE_2025_FILE → schedule_df
+Loaded via: schedule_df = load_csv(NFL_SCHEDULE_2025_FILE)
+
+✅ Required Columns:
+
+Column	Example	Description
+Week	2	Integer week number
+Date	September 15	Month and day of game (no year)
+Home	DET	Home team
+Visitor	SEA	Away team
+Time	1:00 PM ET	Kickoff time (optional for weather timing)
+ProjectedHomeScore	24	Home team projected points (optional)
+ProjectedAwayScore	27	Away team projected points (optional)
+
+📌 Used to:
+
+Find WR opponent
+
+Get score differential
+
+Estimate trailing/leading script
+
+Fetch stadium for weather profile
+
+📄 WR_STATS_2024_FILE → wr_map
+Loaded via: wr_map = load_wr_stats(WR_STATS_2024_FILE)
+
+✅ Required Columns:
+
+Column	Example	Description
+player_id	00-0031234	Unique player ID (GSIS or UUID)
+full_name	Amon-Ra St. Brown	WR name
+team	DET	NFL team
+slot_snap_rate	0.68	% of snaps from slot
+fp_per_target_vs_man	2.1	Fantasy pts vs man coverage
+fp_per_target_vs_zone	1.6	Fantasy pts vs zone coverage
+routes_vs_man	110	Route sample size vs man
+routes_vs_zone	170	Route sample size vs zone
+
+📌 Used to:
+
+Identify WR alignment style
+
+Apply matchup multipliers vs man/zone
+
+Project WR performance under coverage scheme
+
+📄 DB_ALIGNMENT_FILE → db_map
+Loaded via: db_map = load_db_alignment(DB_ALIGNMENT_FILE)
+
+✅ Required Columns:
+
+Column	Example	Description
+week	2	NFL week
+team	SEA	Defensive team
+player_id	00-00...	DB ID
+position	CB-SLOT	Alignment role
+adj_fp	1.4	Adjusted fantasy points allowed
+targets_allowed	5.2	Average targets allowed
+routes_defended	30	Sample size
+coverage_rating	70	Optional defender strength rating
+
+📌 Used to:
+
+Build weighted DB pool per WR role
+
+Soft or hard alignment matching
+
+Estimate coverage pressure
+
+📄 DEF_COVERAGE_TAGS_FILE → def_coverage_map
+✅ Required Columns:
+
+Column	Example	Description
+week	2	NFL week
+team	SEA	Defense team
+man_coverage_rate	0.35	% of man coverage
+zone_coverage_rate	0.65	% of zone coverage
+
+📌 Used to:
+
+Weight WR performance vs man/zone
+
+Blend man/zone splits into a single FP/target score
+
+📄 STADIUM_ENVIRONMENT_PROFILES.csv → env_boost_map
+(Used in weather_estimator.py)
+
+✅ Required Columns:
+
+Column	Example	Description
+Team	DET	Home team (same as stadium)
+Latitude	42.3400	Stadium latitude
+Longitude	-83.0458	Stadium longitude
+TurfType	Dome	Dome / Turf / Grass
+HumidityControl	True	Helps negate weather
+Elevation	620	(Optional) Elevation in feet
+
+📌 Used to:
+
+Pull lat/lon for NOAA forecasts
+
+Estimate weather boosts/penalties
+
+Override bad weather in domes
