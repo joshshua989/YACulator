@@ -22,26 +22,64 @@
 
 ````
 YACulator/
-├── config.py                  # Configuration: file paths, weights, version control
-├── matchup\_simulator.py      # Core logic: matchups and fantasy point adjustments
-├── sim\_engine.py             # Runner: weekly and full-season projection loops
-├── main.py                   # CLI interface using --mode and --week flags
-├── stat\_loader.py            # Standard loader for CSV input files
-├── data\_loader.py            # (Optional) Multi-year blending, nflverse ingestion
-├── quality\_control.py        # Validates data consistency across datasets
-├── multi\_year\_blend.py       # Implements weighted blending of recent years
-├── exports/
-│   ├── season\_projection\_output.csv   # Full season projection output
-│   └── test\_week\_projection.csv       # Single week projection output
-├── data/
-│   ├── NFL\_SCHEDULE\_2025.csv
-│   ├── ADVANCED\_WR\_STATS\_2024.csv
-│   ├── CB\_ALIGNMENT.csv
-│   ├── DEF\_COVERAGE\_TAGS.csv
-│   ├── roster\_2025.csv
-│   └── roster\_2024.csv (optional fallback)
-└── README.md
+main.py
+  └──> sim_engine.py
+        ├── Load NFL Schedule
+        ├── Load WR + DB Stats
+        ├── Load Coverage & Weather Data
+        ├── Build Game Environment Map (weather_boost)
+        ├── Build Coverage Scheme Map (man/zone)
+        ├── Run Simulation (week or season)
+        │     ├── project_wr_week() per WR
+        │     └── Monte Carlo simulations w/ penalties
+        ├── Apply Game Script & Environment Boosts
+        ├── Blend with DraftKings Props (if enabled)
+        ├── Export Projections (CSV)
+        └── Export Weekly HTML Matchup Pages
+
+matchup_simulator.py
+  └──> project_wr_week(wr, week, schedule_df, db_map, def_coverage_map, ...)
+        ├── Identify Opponent Team & Matchup
+        ├── Determine WR Role (slot/wide)
+        ├── Calculate DB Coverage Pool (soft/hard alignments)
+        ├── Apply Coverage Scheme (man vs zone)
+        ├── Simulate Fantasy Output (Monte Carlo or vectorized)
+        └── Return Projection Dictionary (base_pts, adj_pts, WR info)
+
+main.py
+A[Start main.py] --> B[Parse --mode & --week]
+  B --> C{Is mode == "test"?}
+  C -->|Yes| D[Call run_week_simulation(week)]
+  C -->|No| E[Call run_season_simulation()]
+  D --> F[Generate HTML index page]
+  E --> F
+  F --> G[End]
+
+sim_engine.py
+  A[Start Simulation] --> B[Load Schedule + WR/DB Stats]
+  B --> C[Build Coverage & Weather Maps]
+  C --> D{Week or Season?}
+  D -->|Week| E[Loop WRs → project_wr_week()]
+  D -->|Season| F[Pool: simulate_for_week()]
+  E --> G[Build DataFrame: results]
+  F --> G
+  G --> H[Apply game_script_boost × env_boost]
+  H --> I[Load DK Props + Blend Points]
+  I --> J[Export CSVs, HTML, and Reports]
+
+matchup_simulator.py
+
 ````
+
+📍 main.py (Entry Point)
+
+````
+main()
+├── args = --mode test --week 2
+├── run_week_simulation(week=2)
+````
+
+
 
 ---
 
