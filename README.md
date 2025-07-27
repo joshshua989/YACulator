@@ -45,6 +45,58 @@ matchup_simulator.py
         ├── Apply Coverage Scheme (man vs zone)
         ├── Simulate Fantasy Output (Monte Carlo or vectorized)
         └── Return Projection Dictionary (base_pts, adj_pts, WR info)
+
+project_wr_week(wr, week, schedule_df, db_map, def_coverage_map, ...)
+  ├── 🎯 STEP 1: Identify Matchup Context
+  │     ├── Find WR's opponent from schedule_df
+  │     ├── Extract projected score differential
+  │     └── Lookup environmental/weather boost
+  │
+  ├── 🧬 STEP 2: Determine WR Role & Alignment
+  │     ├── Get WR slot vs wide rate
+  │     └── Role affects DB alignment weighting
+  │
+  ├── 🛡 STEP 3: Build DB Pool
+  │     ├── From db_map[week][opp_team]
+  │     └── Use hard or soft alignment logic (based on config)
+  │
+  ├── 🧠 STEP 4: Apply Coverage Scheme
+  │     ├── Determine man vs zone rate from def_coverage_map
+  │     └── Blend WR’s performance splits vs man/zone
+  │
+  ├── 🎲 STEP 5: Simulate Fantasy Output
+  │     ├── Estimate target share, yards, TD probability
+  │     ├── Apply environment + game script modifiers
+  │     ├── Run multiple simulations (or vectorized sample)
+  │     └── Calculate p10, p50, p90, mean, stddev, etc.
+  │
+  └── 📦 STEP 6: Package Projection
+        ├── base_pts (unadjusted)
+        ├── adj_pts (weather & script adjusted)
+        ├── final_pts (if blended later)
+        ├── route/context metadata
+        └── Return as dictionary
+
+main.py
+A[Start main.py] --> B[Parse --mode & --week]
+  B --> C{Is mode == "test"?}
+  C -->|Yes| D[Call run_week_simulation(week)]
+  C -->|No| E[Call run_season_simulation()]
+  D --> F[Generate HTML index page]
+  E --> F
+  F --> G[End]
+
+sim_engine.py
+  A[Start Simulation] --> B[Load Schedule + WR/DB Stats]
+  B --> C[Build Coverage & Weather Maps]
+  C --> D{Week or Season?}
+  D -->|Week| E[Loop WRs → project_wr_week()]
+  D -->|Season| F[Pool: simulate_for_week()]
+  E --> G[Build DataFrame: results]
+  F --> G
+  G --> H[Apply game_script_boost × env_boost]
+  H --> I[Load DK Props + Blend Points]
+  I --> J[Export CSVs, HTML, and Reports]
 ````
 
 📍 main.py (Entry Point)
@@ -84,36 +136,6 @@ def project_wr_week(wr, week, schedule_df, db_map, def_coverage_map, ...):
 ````
 project_wr_week(wr="Amon-Ra", week=2, ...)
 ````
-
-
-
-
-
-
-main.py
-A[Start main.py] --> B[Parse --mode & --week]
-  B --> C{Is mode == "test"?}
-  C -->|Yes| D[Call run_week_simulation(week)]
-  C -->|No| E[Call run_season_simulation()]
-  D --> F[Generate HTML index page]
-  E --> F
-  F --> G[End]
-
-sim_engine.py
-  A[Start Simulation] --> B[Load Schedule + WR/DB Stats]
-  B --> C[Build Coverage & Weather Maps]
-  C --> D{Week or Season?}
-  D -->|Week| E[Loop WRs → project_wr_week()]
-  D -->|Season| F[Pool: simulate_for_week()]
-  E --> G[Build DataFrame: results]
-  F --> G
-  G --> H[Apply game_script_boost × env_boost]
-  H --> I[Load DK Props + Blend Points]
-  I --> J[Export CSVs, HTML, and Reports]
-
-
-
-
 
 ---
 
