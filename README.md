@@ -87,6 +87,28 @@ run_week_simulation(week)
 ├── def_coverage_map ← from DEF_COVERAGE_TAGS_FILE
 ├── env_boost_map ← from weather_estimator.py
 ````
+✅ You now have all context: WRs, DBs, coverage rates, weather boost
+
+
+🔁 WR Loop
+````
+for wr in wr_map.values():  # e.g., wr = Amon-Ra St. Brown
+    proj = project_wr_week(
+        wr, week, schedule_df, db_map, def_coverage_map,
+        simulations=100, precomputed=None, env_boost_map=env_boost_map
+    )
+````
+
+🧠 matchup_simulator.py → project_wr_week(...)
+````
+def project_wr_week(wr, week, schedule_df, db_map, def_coverage_map, ...):
+````
+
+🧩 STEP-BY-STEP WALKTHROUGH
+````
+project_wr_week(wr="Amon-Ra", week=2, ...)
+````
+
 
 
 
